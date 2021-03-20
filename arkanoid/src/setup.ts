@@ -1,8 +1,8 @@
-import RED_BRICK_IMAGE from './images/brick-red.png';
-import BLUE_BRICK_IMAGE from './images/brick-blue.png';
-import GREEN_BRICK_IMAGE from './images/brick-green.png';
-import YELLOW_BRICK_IMAGE from './images/brick-yellow.png';
-import PURPLE_BRICK_IMAGE from './images/brick-purple.png';
+import RED_BRICK_IMAGE from './image/brick-red.png';
+import BLUE_BRICK_IMAGE from './image/brick-blue.png';
+import GREEN_BRICK_IMAGE from './image/brick-green.png';
+import YELLOW_BRICK_IMAGE from './image/brick-yellow.png';
+import PURPLE_BRICK_IMAGE from './image/brick-purple.png';
 
 // Grab the canvas element for calculating the brick width
 // depending on canvas width

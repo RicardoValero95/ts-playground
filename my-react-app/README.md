@@ -1,3 +1,9 @@
+# React App
+This isn't TypeScript, but here's a basic react app. 
+
+Tutorial:
+[Learn React In 30 Minutes](https://www.youtube.com/watch?v=hQAHSlTtcmY)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

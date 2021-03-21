@@ -41,11 +41,14 @@ function gameLoop(
     view: CanvasView,
     bricks: Brick[],
     paddle: Paddle,
-    // ball: Ball
+    ball: Ball
 ) {
     view.clear();
     view.drawBricks(bricks);
     view.drawSprite(paddle);
+    view.drawSprite(ball);
+
+    ball.moveBall();
 
     // Move paddle and check so it won't exit the playfield (this shouldnt be here)
     if(
@@ -56,7 +59,7 @@ function gameLoop(
     }
 
     // I dont like loops 
-    requestAnimationFrame(()=> gameLoop(view, bricks, paddle));
+    requestAnimationFrame(()=> gameLoop(view, bricks, paddle, ball));
 }
 
 function startGame(view: CanvasView){
@@ -66,13 +69,19 @@ function startGame(view: CanvasView){
     view.drawScore(score);
     // Create all bricks
     const bricks = createBricks();
+    // Create a ball
+    const ball = new Ball(
+        BALL_SPEED, BALL_SIZE,
+        {x: BALL_STARTX, y: BALL_STARTY}, 
+        BALL_IMAGE
+    )
     // Create a paddle
     const paddle = new Paddle(
         PADDLE_SPEED, PADDLE_WIDTH, PADDLE_HEIGHT, 
         {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, // wtf 
         PADDLE_IMAGE
     )
-    gameLoop(view, bricks, paddle);
+    gameLoop(view, bricks, paddle, ball);
 }
 
 // Create view i dont like passing the id herre 

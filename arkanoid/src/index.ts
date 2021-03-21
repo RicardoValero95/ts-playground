@@ -5,6 +5,8 @@ import { Ball } from './sprite/Ball';
 import { Brick } from './sprite/Brick';
 import { Paddle } from './sprite/Paddle';
 
+import { Collision } from './Collision';
+
 // Images
 import PADDLE_IMAGE from './image/paddle.png'
 import BALL_IMAGE from './image/ball.png'
@@ -41,7 +43,8 @@ function gameLoop(
     view: CanvasView,
     bricks: Brick[],
     paddle: Paddle,
-    ball: Ball
+    ball: Ball, 
+    collision: Collision
 ) {
     view.clear();
     view.drawBricks(bricks);
@@ -58,8 +61,16 @@ function gameLoop(
         paddle.movePaddle();
     }
 
+    collision.checkBallCollision(ball, paddle, view);
+    const isColliding = collision.isCollidingBricks(ball, bricks);
+
+    if (isColliding) {
+        score += 1;
+        view.drawScore(score);
+    }
+
     // I dont like loops 
-    requestAnimationFrame(()=> gameLoop(view, bricks, paddle, ball));
+    requestAnimationFrame(()=> gameLoop(view, bricks, paddle, ball, collision));
 }
 
 function startGame(view: CanvasView){
@@ -67,6 +78,8 @@ function startGame(view: CanvasView){
     score = 0;
     view.drawInfo('');
     view.drawScore(score);
+    // Create collision
+    const collision = new Collision();
     // Create all bricks
     const bricks = createBricks();
     // Create a ball
@@ -81,7 +94,7 @@ function startGame(view: CanvasView){
         {x: PADDLE_STARTX, y: view.canvas.height - PADDLE_HEIGHT - 5}, // wtf 
         PADDLE_IMAGE
     )
-    gameLoop(view, bricks, paddle, ball);
+    gameLoop(view, bricks, paddle, ball, collision);
 }
 
 // Create view i dont like passing the id herre 

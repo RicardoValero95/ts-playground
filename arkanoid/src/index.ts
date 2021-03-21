@@ -69,6 +69,11 @@ function gameLoop(
         view.drawScore(score);
     }
 
+    if (bricks.length === 0) return setGameWin(view);
+    // why do you need a gameover boolean?
+    if (ball.position.y > view.canvas.height) gameOver = true;
+    if(gameOver) return setGameOver(view);
+    
     // I dont like loops 
     requestAnimationFrame(()=> gameLoop(view, bricks, paddle, ball, collision));
 }
